@@ -1,4 +1,4 @@
-import { TODO_ADDED, TODO_REMOVED } from '../actions';
+import { TODO_ADDED, TODO_REMOVED, TODOS_SET } from '../actions';
 
 const defaultState = {
   todos: [],
@@ -6,14 +6,18 @@ const defaultState = {
 
 const reducers = (state = defaultState, action) => {
   switch (action.type) {
+    case TODOS_SET:
+      return {
+        ...state,
+        todos: action.todos,
+      };
     case TODO_ADDED:
       return {
         ...state,
         todos: [...state.todos, action.todo],
       };
     case TODO_REMOVED:
-      let todos = [...state.todos];
-      todos.splice(action.todo_index, 1);
+      const todos = [...state.todos].filter(td => td.id !== action.todo_id);
 
       return {
         ...state,

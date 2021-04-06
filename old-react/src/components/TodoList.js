@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
-import { removeTodo } from '../redux/actions';
+import { removeTodo, setTodos, DB_URL } from '../redux/actions';
 
 class TodoList extends Component {
+  componentDidMount() {
+    this.props.setTodos();
+  }
+
+  removeTodo = async todo_id => {
+    await axios.delete(`${DB_URL}/${todo_id}`);
+
+    this.props.removeTodo(todo_id);
+  };
+
   render() {
     return (
       <ul className="todo-list">
-        {this.props.todos.map((todo, idx) => (
-          <li className="todo">
-            <h3>{todo}</h3>
-            <button onClick={() => this.props.removeTodo(idx)}>(X)</button>
+        {this.props.todos.map(({ title, id }) => (
+          <li className="todo" key={id}>
+            <h3>{title}</h3>
+            <button onClick={() => this.removeTodo(id)}>(X)</button>
           </li>
         ))}
       </ul>
@@ -26,6 +37,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    setTodos: () => dispatch(setTodos()),
     removeTodo: todo_index => dispatch(removeTodo(todo_index)),
   };
 };
