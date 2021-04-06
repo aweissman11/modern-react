@@ -1,16 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import axios from 'axios';
 
 import TodosContext from '../context/TodosContext';
+import { DB_URL } from '../context/TodosState';
 
 const TodoList = (/* props */) => {
-  const { todos, removeTodo } = useContext(TodosContext);
+  const todosCtx = useContext(TodosContext);
+
+  useEffect(() => {
+    todosCtx.setTodos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [todosCtx.todos.length]);
+
+  const removeTodo = async todo_id => {
+    await axios.delete(`${DB_URL}/${todo_id}`);
+    todosCtx.removeTodo(todo_id);
+  };
 
   return (
     <ul className="todo-list">
-      {todos.map((todo, idx) => (
-        <li className="todo" key={idx}>
-          <h3>{todo}</h3>
-          <button onClick={() => removeTodo(idx)}>(X)</button>
+      {todosCtx.todos.map(({ title, id }) => (
+        <li className="todo" key={id}>
+          <h3>{title}</h3>
+          <button onClick={() => removeTodo(id)}>(X)</button>
         </li>
       ))}
     </ul>
