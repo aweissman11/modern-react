@@ -1,4 +1,8 @@
 import React from 'react';
+
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
+
 import './App.css';
 
 class App extends React.Component {
@@ -7,21 +11,12 @@ class App extends React.Component {
 
     this.state = {
       todos: [],
-      todoText: '',
     };
   }
 
-  addTodo = e => {
-    e.preventDefault();
+  addTodo = newTodo => {
     this.setState({
-      todos: [...this.state.todos, this.state.todoText],
-      todoText: '',
-    });
-  };
-
-  changeText = e => {
-    this.setState({
-      todoText: e.target.value,
+      todos: [...this.state.todos, newTodo],
     });
   };
 
@@ -34,20 +29,9 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1>Devedo App</h1>
-        <form className="new-todo-form" onSubmit={this.addTodo}>
-          <input onChange={this.changeText} value={this.state.todoText} />
-          <button type="submit">Add Todo</button>
-        </form>
-
-        <ul className="todo-list">
-          {this.state.todos.map((todo, idx) => (
-            <li className="todo" key={idx}>
-              <h3>{todo}</h3>
-              <button onClick={() => this.removeTodo(idx)}>(X)</button>
-            </li>
-          ))}
-        </ul>
+        <h1>Old Devedo App</h1>
+        <TodoForm addTodo={this.addTodo} />
+        <TodoList todos={this.state.todos} removeTodo={this.removeTodo} />
       </div>
     );
   }

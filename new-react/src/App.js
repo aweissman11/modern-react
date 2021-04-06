@@ -1,20 +1,14 @@
 import { useState } from 'react';
 
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
+
 import './App.css';
 
 const App = () => {
   const [todos, setTodos] = useState([]);
-  const [todoText, changeTodoText] = useState('');
 
-  const changeText = e => {
-    changeTodoText(e.target.value);
-  };
-
-  const addTodo = e => {
-    e.preventDefault();
-    setTodos([...todos, todoText]);
-    changeTodoText('');
-  };
+  const addTodo = newTodo => setTodos([...todos, newTodo]);
 
   const removeTodo = idx => {
     let newTodos = [...todos];
@@ -24,20 +18,9 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Devedo App</h1>
-      <form className="new-todo-form" onSubmit={addTodo}>
-        <input onChange={changeText} value={todoText} />
-        <button type="submit">Add Todo</button>
-      </form>
-
-      <ul className="todo-list">
-        {todos.map((todo, idx) => (
-          <li className="todo" key={idx}>
-            <h3>{todo}</h3>
-            <button onClick={() => removeTodo(idx)}>(X)</button>
-          </li>
-        ))}
-      </ul>
+      <h1>New Devedo App</h1>
+      <TodoForm addTodo={addTodo} />
+      <TodoList todos={todos} removeTodo={removeTodo} />
     </div>
   );
 };
