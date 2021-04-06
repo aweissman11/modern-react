@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { TodosState } from './context/TodosState';
+
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 
@@ -17,11 +19,13 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <h1>New Devedo App</h1>
-      <TodoForm addTodo={addTodo} />
-      <TodoList todos={todos} removeTodo={removeTodo} />
-    </div>
+    <TodosState>
+      <div className="App">
+        <h1>New Devedo App</h1>
+        <TodoForm addTodo={addTodo} />
+        <TodoList todos={todos} removeTodo={removeTodo} />
+      </div>
+    </TodosState>
   );
 };
 

@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
-const TodoForm = props => {
+import TodosContext from '../context/TodosContext';
+
+const TodoForm = (/* props */) => {
   const [todoText, changeText] = useState('');
+  const todosCtx = useContext(TodosContext);
 
   const addTodo = e => {
     e.preventDefault();
-    props.addTodo(todoText);
+    todosCtx.addTodo(todoText);
     changeText('');
   };
 
