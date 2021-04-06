@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class TodoList extends Component {
+import { removeTodo } from '../redux/actions';
+
+class TodoList extends Component {
   render() {
     return (
       <ul className="todo-list">
@@ -14,3 +17,17 @@ export default class TodoList extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    todos: state.todosReducer.todos,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    removeTodo: todo_index => dispatch(removeTodo(todo_index)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
