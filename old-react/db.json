@@ -2,31 +2,23 @@
   "todos": [
     {
       "id": 1,
-      "title": "delectus aut autem"
+      "title": "Learn React"
     },
     {
       "id": 2,
-      "title": "quis ut nam facilis et officia qui"
+      "title": "Get a job as a web developer"
     },
     {
       "id": 3,
-      "title": "fugiat veniam minus"
+      "title": "Sneak weird easter eggs into sample apps"
     },
     {
       "id": 4,
-      "title": "et porro tempora"
+      "title": "??????????"
     },
     {
-      "id": 5,
-      "title": "laboriosam mollitia et enim quasi adipisci quia provident illum"
-    },
-    {
-      "id": 6,
-      "title": "qui ullam ratione quibusdam voluptatem quia omnis"
-    },
-    {
-      "id": 7,
-      "title": "illo expedita consequatur quia in"
+      "title": "Profit",
+      "id": 5
     }
   ]
 }
